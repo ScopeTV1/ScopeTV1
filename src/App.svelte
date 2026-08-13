@@ -277,20 +277,38 @@
         };
     });
 
-    $: isSmallViewport = viewportWidth <= 520;
-    $: isMediumViewport = viewportWidth <= 900;
+    $: isPhoneViewport = viewportWidth <= 640 || viewportHeight <= 520;
+    $: isShortViewport = viewportHeight <= 520;
 
     function getGraphOrigin() {
-        return { x: 50, y: 50 };
+        return {
+            x: 50,
+            y:
+                view === "category" && isPhoneViewport
+                    ? isShortViewport
+                        ? 43
+                        : 46
+                    : 50,
+        };
     }
 
     function getRadialRadii(scale = 1) {
         const width = Math.max(viewportWidth, 320);
         const height = Math.max(viewportHeight, 480);
-        const widthRatio = isSmallViewport ? 0.31 : 0.245;
-        const heightRatio = isSmallViewport ? 0.23 : 0.285;
-        const radius =
-            Math.min(width * widthRatio, height * heightRatio) * scale;
+
+        if (isPhoneViewport) {
+            const radiusX = Math.min(width * 0.31, 210) * scale;
+            const radiusY =
+                Math.min(height * (isShortViewport ? 0.19 : 0.205), 170) *
+                scale;
+
+            return {
+                radiusX: (radiusX / width) * 100,
+                radiusY: (radiusY / height) * 100,
+            };
+        }
+
+        const radius = Math.min(width * 0.245, height * 0.285) * scale;
 
         return {
             radiusX: (radius / width) * 100,
@@ -347,8 +365,8 @@
         return [
             {
                 ...person,
-                x: isSmallViewport ? 12 : 15,
-                y: 50,
+                x: isPhoneViewport ? 10 : 15,
+                y: origin.y,
                 breadcrumb: true,
                 delay: 0,
             },
@@ -401,16 +419,16 @@
     }
 
     function getNodeDiameter(node) {
-        if (isSmallViewport) {
+        if (isPhoneViewport) {
             if (node.kind === "person") {
-                return node.breadcrumb ? 58 : 84;
+                return node.breadcrumb ? 56 : 82;
             }
 
             if (node.kind === "item") {
-                return 58;
+                return viewportWidth <= 360 ? 54 : 58;
             }
 
-            return node.open ? 84 : 76;
+            return node.open ? 82 : 74;
         }
 
         if (node.kind === "person") {
