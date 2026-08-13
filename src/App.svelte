@@ -222,6 +222,7 @@
     let returnFocusId = null;
     let viewportWidth = 1200;
     let viewportHeight = 800;
+    let hasCoarsePointer = false;
     let scrollProgress = 0;
     let isNavigating = false;
     let hoveredId = null;
@@ -236,6 +237,7 @@
         const updateViewport = () => {
             viewportWidth = window.innerWidth;
             viewportHeight = window.innerHeight;
+            hasCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
         };
 
         const updateScrollProgress = () => {
@@ -277,8 +279,10 @@
         };
     });
 
-    $: isPhoneViewport = viewportWidth <= 640 || viewportHeight <= 520;
-    $: isShortViewport = viewportHeight <= 520;
+    $: isPhoneViewport =
+        viewportWidth <= 640 ||
+        (hasCoarsePointer && viewportWidth <= 960 && viewportHeight <= 520);
+    $: isShortViewport = isPhoneViewport && viewportHeight <= 520;
 
     function getGraphOrigin() {
         return {
@@ -292,19 +296,27 @@
         };
     }
 
+    function getGraphDimensions() {
+        return {
+            width: Math.max(Math.min(viewportWidth, 1280), 320),
+            height: Math.max(viewportHeight, 480),
+        };
+    }
+
     function getRadialRadii(scale = 1) {
-        const width = Math.max(viewportWidth, 320);
-        const height = Math.max(viewportHeight, 480);
+        const { width, height } = getGraphDimensions();
 
         if (isPhoneViewport) {
-            const radiusX = Math.min(width * 0.31, 210) * scale;
-            const radiusY =
-                Math.min(height * (isShortViewport ? 0.19 : 0.205), 170) *
-                scale;
+            const radius =
+                Math.min(
+                    width * 0.31,
+                    height * (isShortViewport ? 0.19 : 0.205),
+                    170,
+                ) * scale;
 
             return {
-                radiusX: (radiusX / width) * 100,
-                radiusY: (radiusY / height) * 100,
+                radiusX: (radius / width) * 100,
+                radiusY: (radius / height) * 100,
             };
         }
 
@@ -447,8 +459,9 @@
     }
 
     function getEdgePoints(start, end) {
-        const dx = ((end.x - start.x) / 100) * viewportWidth;
-        const dy = ((end.y - start.y) / 100) * viewportHeight;
+        const { width, height } = getGraphDimensions();
+        const dx = ((end.x - start.x) / 100) * width;
+        const dy = ((end.y - start.y) / 100) * height;
         const distance = Math.max(Math.hypot(dx, dy), 1);
         const unitX = dx / distance;
         const unitY = dy / distance;
@@ -469,10 +482,10 @@
             (end.motionDiameter ?? getNodeDiameter(end)) * endScale;
 
         return {
-            x1: start.x + (unitX * startRadius * 100) / viewportWidth,
-            y1: start.y + (unitY * startRadius * 100) / viewportHeight,
-            x2: end.x - (unitX * endRadius * 100) / viewportWidth,
-            y2: end.y - (unitY * endRadius * 100) / viewportHeight,
+            x1: start.x + (unitX * startRadius * 100) / width,
+            y1: start.y + (unitY * startRadius * 100) / height,
+            x2: end.x - (unitX * endRadius * 100) / width,
+            y2: end.y - (unitY * endRadius * 100) / height,
         };
     }
 
