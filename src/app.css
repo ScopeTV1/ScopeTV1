@@ -301,7 +301,7 @@ h1 em {
     transform: translate(-50%, -50%);
     box-shadow: none;
     transition: background .25s ease, border-color .25s ease, box-shadow .42s ease, color .25s ease, filter .35s ease, transform .42s cubic-bezier(.22, 1, .36, 1);
-    width: var(--node-size, clamp(92px, 7.8vw, 104px));
+    width: var(--node-size, clamp(84px, 7.2vw, 92px));
     will-change: left, top, opacity;
 }
 
@@ -347,7 +347,7 @@ h1 em {
     filter: none;
     opacity: var(--icon-opacity, 1);
     padding: 4px;
-    width: var(--node-size, clamp(108px, 9.3vw, 124px));
+    width: var(--node-size, clamp(104px, 8.6vw, 114px));
     z-index: 6;
 }
 
@@ -363,7 +363,7 @@ h1 em {
     color: var(--coral);
     filter: none;
     opacity: var(--icon-opacity, 1);
-    width: var(--node-size, clamp(74px, 6.4vw, 86px));
+    width: var(--node-size, clamp(68px, 5.8vw, 76px));
 }
 
 .person-icon {
@@ -393,12 +393,32 @@ h1 em {
 .graph-node.category.open {
     background: rgba(241, 238, 232, .88);
     box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 10%, transparent);
-    width: var(--node-size, clamp(102px, 8.7vw, 114px));
+    width: var(--node-size, clamp(90px, 7.8vw, 98px));
+}
+
+.graph-node.category.context {
+    border-width: 1px;
+    width: var(--node-size, clamp(64px, 5.6vw, 70px));
 }
 
 .graph-node.item {
     background: rgba(241, 238, 232, .88);
-    width: var(--node-size, clamp(68px, 6.2vw, 76px));
+    width: var(--node-size, clamp(60px, 5.5vw, 66px));
+}
+
+.graph-node.item.preview {
+    background: color-mix(in srgb, var(--paper) 78%, transparent);
+    border-width: 1px;
+    padding: 6px;
+    width: var(--node-size, clamp(44px, 3.8vw, 48px));
+    z-index: 3;
+}
+
+.graph-node.item.focused {
+    background: rgba(241, 238, 232, .96);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent, var(--coral)) 11%, transparent);
+    width: var(--node-size, clamp(92px, 7.8vw, 100px));
+    z-index: 7;
 }
 
 .graph-node.item.logo-node {
@@ -419,6 +439,44 @@ h1 em {
     box-shadow: 0 0 0 6px color-mix(in srgb, var(--coral) 11%, transparent);
 }
 
+.graph-node.item.preview.logo-node {
+    background: color-mix(in srgb, var(--paper) 78%, transparent);
+    border-color: var(--accent, var(--coral));
+    padding: 6px;
+}
+
+.graph-node.tool {
+    background: rgba(241, 238, 232, .94);
+    border-width: 1px;
+    padding: 7px;
+    width: var(--node-size, clamp(34px, 3.4vw, 38px));
+    z-index: 5;
+}
+
+.graph-node.tool.overview-tool {
+    background: rgba(241, 238, 232, .9);
+    border-color: color-mix(in srgb, var(--accent, var(--coral)) 72%, transparent);
+    padding: 2px;
+    pointer-events: none;
+    width: var(--node-size, 18px);
+}
+
+.graph-node.tool.background-tool {
+    padding: 4px;
+    width: var(--node-size, 24px);
+}
+
+.graph-node.tool.overview-tool .tool-logo {
+    height: 82%;
+    width: 82%;
+}
+
+.graph-node.tool.overview-tool .node-symbol svg {
+    height: 76%;
+    stroke-width: 1.8;
+    width: 76%;
+}
+
 .tool-logo-lockup {
     align-items: center;
     display: flex;
@@ -436,6 +494,24 @@ h1 em {
     width: 72%;
 }
 
+.node-symbol {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.node-symbol svg {
+    fill: none;
+    height: 68%;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    width: 68%;
+}
+
 .logo-pair .tool-logo-lockup {
     gap: 1px;
 }
@@ -451,6 +527,14 @@ h1 em {
     line-height: 1.15;
     max-width: 88px;
     text-wrap: balance;
+}
+
+.graph-node.preview .node-label {
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(.46rem, .55vw, .56rem);
+    letter-spacing: -.02em;
+    line-height: 1.08;
+    max-width: 46px;
 }
 
 .graph-detail {
@@ -498,6 +582,26 @@ h1 em {
     font-size: .7rem;
     line-height: 1.5;
     margin: 0;
+}
+
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.detail-tags li {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: .48rem;
+    letter-spacing: .02em;
+    padding: 3px 6px;
+    white-space: nowrap;
 }
 
 .site-footer {
@@ -646,28 +750,61 @@ h1 em {
 
     .graph-node {
         padding: 9px;
-        width: var(--node-size, 74px);
+        width: var(--node-size, 68px);
     }
 
     .graph-node.item {
-        width: var(--node-size, 58px);
+        width: var(--node-size, 54px);
+    }
+
+    .graph-node.item.preview {
+        padding: 4px;
+        width: var(--node-size, 40px);
+    }
+
+    .graph-node.tool {
+        padding: 5px;
+        width: var(--node-size, 32px);
+    }
+
+    .graph-node.tool.overview-tool {
+        padding: 2px;
+        width: var(--node-size, 14px);
+    }
+
+    .graph-node.tool.background-tool {
+        padding: 3px;
+        width: var(--node-size, 20px);
     }
 
     .graph-node.category.open {
-        width: var(--node-size, 82px);
+        width: var(--node-size, 74px);
+    }
+
+    .graph-node.category.context {
+        width: var(--node-size, 52px);
+    }
+
+    .graph-node.item.focused {
+        width: var(--node-size, 72px);
     }
 
     .graph-node.person {
-        width: var(--node-size, 82px);
+        width: var(--node-size, 78px);
     }
 
     .graph-node.person.breadcrumb {
-        width: var(--node-size, 56px);
+        width: var(--node-size, 52px);
     }
 
     .node-label {
         font-size: .61rem;
         max-width: 66px;
+    }
+
+    .graph-node.preview .node-label {
+        font-size: .43rem;
+        max-width: 36px;
     }
 
     .graph-detail {
@@ -697,6 +834,16 @@ h1 em {
     .detail-copy p {
         font-size: .65rem;
         max-width: 300px;
+    }
+
+    .detail-tags {
+        gap: 4px;
+        margin-top: 7px;
+    }
+
+    .detail-tags li {
+        font-size: .44rem;
+        padding: 2px 5px;
     }
 
     .site-footer {
@@ -828,7 +975,7 @@ h1 em {
     }
 
     .graph-node.item {
-        width: var(--node-size, 54px);
+        width: var(--node-size, 50px);
     }
 
     .site-footer {

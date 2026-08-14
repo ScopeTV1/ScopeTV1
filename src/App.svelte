@@ -11,213 +11,210 @@
 
     const categories = [
         {
-            id: "tools",
-            label: "Tools",
-            eyebrow: "Build with",
+            id: "projects",
+            label: "Projects",
+            eyebrow: "What I make",
             description:
-                "The frameworks, platforms, and languages I use to turn ideas into working products.",
+                "Selected work where ideas become useful, working experiences.",
             kind: "category",
-            accent: "#647b60",
+            accent: "#c7634a",
             symbol: "01",
             items: [
                 {
-                    id: "sveltekit",
-                    label: "SvelteKit",
-                    eyebrow: "Web framework",
+                    id: "scopetv1",
+                    label: "ScopeTV1",
+                    eyebrow: "Interactive portfolio",
                     description:
-                        "Fast, focused web experiences built with SvelteKit.",
+                        "A responsive portfolio built as a navigable map of projects, experience, and engineering practice.",
                     kind: "item",
+                    showOnOverview: true,
                     logos: [
                         "https://www.svgrepo.com/show/354416/svelte-icon.svg",
                     ],
-                },
-                {
-                    id: "react",
-                    label: "React",
-                    eyebrow: "Interface library",
-                    description:
-                        "Component-driven interfaces for flexible, interactive products.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/354259/react.svg",
-                    ],
-                },
-                {
-                    id: "microsoft-fabric",
-                    label: "Microsoft Fabric",
-                    eyebrow: "Data platform",
-                    description:
-                        "An end-to-end analytics platform for bringing data, engineering, and insight together.",
-                    kind: "item",
-                    logos: ["/logos/microsoft-fabric-color.svg?v=2"],
-                },
-                {
-                    id: "github",
-                    label: "GitHub",
-                    eyebrow: "Code collaboration",
-                    description:
-                        "Versioned work, open collaboration, and reliable project delivery.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/353780/github-icon.svg",
-                    ],
-                },
-                {
-                    id: "visual-studio-code",
-                    label: "Visual Studio Code",
-                    eyebrow: "Development environment",
-                    description:
-                        "My focused workspace for building, testing, and refining code.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/354522/visual-studio-code.svg",
-                    ],
-                },
-                {
-                    id: "html-css",
-                    label: "HTML / CSS",
-                    eyebrow: "Visual structure",
-                    description:
-                        "Structure, typography, and visual systems that hold an experience together.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/452228/html-5.svg",
-                        "https://www.svgrepo.com/show/452185/css-3.svg",
-                    ],
-                },
-                {
-                    id: "python",
-                    label: "Python",
-                    eyebrow: "Patterns and automation",
-                    description:
-                        "A practical language for exploring data, patterns, and useful automation.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/452091/python.svg",
-                    ],
-                },
-                {
-                    id: "java",
-                    label: "Java",
-                    eyebrow: "Application development",
-                    description:
-                        "Structured, portable software for dependable applications and services.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/452234/java.svg",
-                    ],
-                },
-                {
-                    id: "sql",
-                    label: "SQL",
-                    eyebrow: "Finding the signal",
-                    description:
-                        "A way to ask precise questions of messy information and make the answer useful.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/331760/sql-database-generic.svg",
-                    ],
+                    tags: ["Svelte", "Vite", "Responsive UI"],
                 },
             ],
         },
         {
-            id: "ai",
-            label: "AI",
-            eyebrow: "Think alongside",
+            id: "background",
+            label: "Background",
+            eyebrow: "Where I grew",
             description:
-                "Tools I use to explore possibilities, sharpen questions, and move from thought to prototype.",
+                "The academic and professional environments that shaped how I think and build.",
             kind: "category",
-            accent: "#b66a4f",
+            accent: "#8b7653",
             symbol: "02",
             items: [
                 {
-                    id: "codex",
-                    label: "Codex",
-                    eyebrow: "Build",
+                    id: "universities",
+                    label: "Universities",
+                    eyebrow: "Academic context",
                     description:
-                        "An engineering agent for turning scoped ideas into tested, working code.",
+                        "The places where I developed foundations, explored ideas, and learned to connect disciplines.",
                     kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/306500/openai.svg",
-                    ],
+                    showOnOverview: true,
+                    icon: "university",
+                    tags: ["Learning", "Research", "Foundations"],
                 },
                 {
-                    id: "claude",
-                    label: "Claude",
-                    eyebrow: "Reason",
+                    id: "companies",
+                    label: "Companies",
+                    eyebrow: "Professional context",
                     description:
-                        "A thoughtful collaborator for close reading, reasoning, and clear writing.",
+                        "The teams and organizations where I applied those ideas to practical work and shared outcomes.",
                     kind: "item",
-                    logos: ["https://cdn.simpleicons.org/claude"],
-                },
-                {
-                    id: "github-copilot",
-                    label: "GitHub Copilot",
-                    eyebrow: "Code alongside",
-                    description:
-                        "AI assistance embedded directly into the development workflow.",
-                    kind: "item",
-                    logos: ["https://cdn.simpleicons.org/githubcopilot"],
-                },
-                {
-                    id: "openrouter",
-                    label: "OpenRouter",
-                    eyebrow: "Connect models",
-                    description:
-                        "One flexible interface for comparing and working across AI models.",
-                    kind: "item",
-                    logos: ["/logos/openrouter.svg"],
-                },
-                {
-                    id: "machine-learning",
-                    label: "Machine Learning",
-                    eyebrow: "Find patterns",
-                    description:
-                        "Models and experiments that turn data into useful predictions and signals.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/421448/chip-intelligence-processor.svg",
-                    ],
-                },
-                {
-                    id: "pyspark",
-                    label: "PySpark",
-                    eyebrow: "Scale data",
-                    description:
-                        "Distributed Python workflows for transforming and analyzing large datasets.",
-                    kind: "item",
-                    logos: [
-                        "https://www.svgrepo.com/show/341608/apache-spark.svg",
-                    ],
+                    showOnOverview: true,
+                    icon: "company",
+                    tags: ["Teams", "Delivery", "Collaboration"],
                 },
             ],
         },
         {
-            id: "projects",
-            label: "Projects",
-            eyebrow: "Make the signal visible",
+            id: "engineering",
+            label: "Engineering",
+            eyebrow: "How I build",
             description:
-                "Experiments that connect information, interface, and a point of view.",
+                "The technical practices I use to move from a concept to something reliable and useful.",
             kind: "category",
-            accent: "#c7634a",
+            accent: "#647b60",
             symbol: "03",
-            items: [],
-        },
-        {
-            id: "companies",
-            label: "Companies",
-            eyebrow: "Build in context",
-            description:
-                "The kinds of places and collaborations where I look for the useful connection.",
-            kind: "category",
-            accent: "#8b7653",
-            symbol: "04",
-            items: [],
+            items: [
+                {
+                    id: "development",
+                    label: "Develop",
+                    eyebrow: "Interfaces and applications",
+                    description:
+                        "Building clear, responsive products with SvelteKit, React, HTML, CSS, Java, and Python.",
+                    kind: "item",
+                    showOnOverview: true,
+                    tags: ["SvelteKit", "React", "Java", "Python"],
+                    tools: [
+                        {
+                            id: "sveltekit",
+                            label: "SvelteKit",
+                            description:
+                                "Fast, focused web experiences built with SvelteKit.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/354416/svelte-icon.svg",
+                            ],
+                        },
+                        {
+                            id: "react",
+                            label: "React",
+                            description:
+                                "Component-driven interfaces for flexible, interactive products.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/354259/react.svg",
+                            ],
+                        },
+                        {
+                            id: "html-css",
+                            label: "HTML / CSS",
+                            description:
+                                "Structure, typography, and visual systems for the web.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/452228/html-5.svg",
+                                "https://www.svgrepo.com/show/452185/css-3.svg",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    id: "data-ai",
+                    label: "Data + AI",
+                    eyebrow: "Patterns and intelligence",
+                    description:
+                        "Turning information into insight with SQL, Microsoft Fabric, PySpark, machine learning, and AI-assisted workflows.",
+                    kind: "item",
+                    showOnOverview: true,
+                    tags: ["SQL", "Fabric", "PySpark", "AI / ML"],
+                    tools: [
+                        {
+                            id: "microsoft-fabric",
+                            label: "Microsoft Fabric",
+                            description:
+                                "An analytics platform for bringing data, engineering, and insight together.",
+                            kind: "tool",
+                            logos: ["/logos/microsoft-fabric-color.svg?v=2"],
+                        },
+                        {
+                            id: "sql",
+                            label: "SQL",
+                            description:
+                                "Precise questions, useful structure, and reliable data work.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/331760/sql-database-generic.svg",
+                            ],
+                        },
+                        {
+                            id: "ai-ml",
+                            label: "AI / ML",
+                            description:
+                                "Models and AI-assisted workflows that turn patterns into useful signals.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/306500/openai.svg",
+                            ],
+                        },
+                    ],
+                },
+                {
+                    id: "ship",
+                    label: "Ship",
+                    eyebrow: "Delivery and reliability",
+                    description:
+                        "Using Git, GitHub, testing, CI/CD, and deployment workflows to move changes safely into production.",
+                    kind: "item",
+                    showOnOverview: true,
+                    tags: ["GitHub", "Testing", "CI/CD", "Deployment"],
+                    tools: [
+                        {
+                            id: "github",
+                            label: "GitHub",
+                            description:
+                                "Versioned collaboration and a dependable home for delivery workflows.",
+                            kind: "tool",
+                            logos: [
+                                "https://www.svgrepo.com/show/353780/github-icon.svg",
+                            ],
+                        },
+                        {
+                            id: "ci-cd",
+                            label: "CI/CD",
+                            description:
+                                "Automated checks and delivery pipelines that keep releases repeatable.",
+                            kind: "tool",
+                            icon: "cicd",
+                        },
+                        {
+                            id: "testing",
+                            label: "Testing",
+                            description:
+                                "Feedback loops that catch regressions before users do.",
+                            kind: "tool",
+                            icon: "testing",
+                        },
+                        {
+                            id: "deployment",
+                            label: "Deployment",
+                            description:
+                                "Moving tested changes into production with a clear release path.",
+                            kind: "tool",
+                            icon: "deployment",
+                        },
+                    ],
+                },
+            ],
         },
     ];
 
     let view = "overview";
     let activeCategoryId = null;
+    let focusedItemId = null;
     let selectedId = person.id;
     let returnFocusId = null;
     let viewportWidth = 1200;
@@ -331,9 +328,9 @@
         if (isPhoneViewport) {
             const radius =
                 Math.min(
-                    width * 0.31,
-                    height * (isShortViewport ? 0.19 : 0.205),
-                    170,
+                    width * 0.28,
+                    height * (isShortViewport ? 0.175 : 0.185),
+                    155,
                 ) * scale;
 
             return {
@@ -342,7 +339,7 @@
             };
         }
 
-        const radius = Math.min(width * 0.245, height * 0.285) * scale;
+        const radius = Math.min(width * 0.175, height * 0.205) * scale;
 
         return {
             radiusX: (radius / width) * 100,
@@ -366,25 +363,154 @@
         };
     }
 
+    function positionAtAngle(
+        angle,
+        radiusX,
+        radiusY,
+        origin = { x: 50, y: 50 },
+    ) {
+        return {
+            x: origin.x + Math.cos(angle) * radiusX,
+            y: origin.y + Math.sin(angle) * radiusY,
+        };
+    }
+
+    function positionAroundNode(
+        node,
+        index,
+        total,
+        radius,
+        startAngle = -Math.PI / 2,
+    ) {
+        const { width, height } = getGraphDimensions();
+        const angle = startAngle + (index * Math.PI * 2) / total;
+
+        return {
+            x: node.x + (Math.cos(angle) * radius * 100) / width,
+            y: node.y + (Math.sin(angle) * radius * 100) / height,
+        };
+    }
+
+    function constrainPosition(position, radius, margin = 8) {
+        const { width, height } = getGraphDimensions();
+        const insetX = ((radius + margin) * 100) / width;
+        const insetY = ((radius + margin) * 100) / height;
+
+        return {
+            x: clamp(insetX, position.x, 100 - insetX),
+            y: clamp(insetY, position.y, 100 - insetY),
+        };
+    }
+
+    function getOverviewPreviewRadii() {
+        const { width, height } = getGraphDimensions();
+        const { radiusX } = getRadialRadii();
+        const categoryRadius = (radiusX / 100) * width;
+        const gap = isPhoneViewport
+            ? viewportWidth <= 360
+                ? 56
+                : 60
+            : clamp(76, width * 0.066, 84);
+        const radius = Math.min(
+            categoryRadius + gap,
+            width * 0.47,
+            height * 0.42,
+        );
+
+        return {
+            radiusX: (radius / width) * 100,
+            radiusY: (radius / height) * 100,
+        };
+    }
+
     function getOverviewNodes() {
         const origin = getGraphOrigin();
         const { radiusX, radiusY } = getRadialRadii();
+        const previewRadii = getOverviewPreviewRadii();
+        const startAngle = -Math.PI / 2;
+        const categoryNodes = categories.map((category, index) => {
+            const overviewAngle =
+                startAngle + (index * Math.PI * 2) / categories.length;
+
+            return {
+                ...category,
+                ...origin,
+                ...positionAtAngle(
+                    overviewAngle,
+                    radiusX,
+                    radiusY,
+                    origin,
+                ),
+                overviewAngle,
+                delay: index * 70,
+            };
+        });
+        const previewNodes = categoryNodes.flatMap((category, categoryIndex) => {
+            const previewItems = category.items.filter(
+                (item) => item.showOnOverview,
+            );
+            const angleStep =
+                category.id === "engineering"
+                    ? 0.46
+                    : isPhoneViewport
+                      ? 0.24
+                      : 0.2;
+            const edgeBias =
+                categoryIndex === 1
+                    ? 0.1
+                    : categoryIndex === 2
+                      ? isPhoneViewport
+                          ? -0.25
+                          : -0.2
+                      : 0;
+
+            return previewItems.map((item, itemIndex) => {
+                const angleOffset =
+                    (itemIndex - (previewItems.length - 1) / 2) * angleStep;
+                const previewPosition = constrainPosition(
+                    positionAtAngle(
+                        category.overviewAngle + edgeBias + angleOffset,
+                        previewRadii.radiusX,
+                        previewRadii.radiusY,
+                        origin,
+                    ),
+                    isPhoneViewport ? 21 : 27,
+                    12,
+                );
+
+                return {
+                    ...item,
+                    parentId: category.id,
+                    preview: true,
+                    ...previewPosition,
+                    delay: 210 + categoryIndex * 90 + itemIndex * 45,
+                };
+            });
+        });
+        const overviewToolNodes = previewNodes.flatMap((item, itemIndex) =>
+            (item.tools ?? []).map((tool, toolIndex) => ({
+                ...tool,
+                parentId: item.id,
+                overviewTool: true,
+                ...constrainPosition(
+                    positionAroundNode(
+                        item,
+                        toolIndex,
+                        item.tools.length,
+                        isPhoneViewport ? 29 : 35,
+                        -Math.PI / 2 + itemIndex * 0.31,
+                    ),
+                    isPhoneViewport ? 8 : 10,
+                ),
+                delay: 520 + itemIndex * 75 + toolIndex * 30,
+            })),
+        );
 
         return [
             { ...person, ...origin, delay: 0 },
-            ...categories.map((category, index) => ({
-                ...category,
-                ...origin,
-                ...positionAroundCircle(
-                    index,
-                    categories.length,
-                    radiusX,
-                    radiusY,
-                    undefined,
-                    origin,
-                ),
-                delay: index * 70,
-            })),
+            ...categoryNodes,
+            ...previewNodes,
+            ...overviewToolNodes,
         ];
     }
 
@@ -394,23 +520,58 @@
         }
 
         const origin = getGraphOrigin();
-        const { radiusX, radiusY } = getRadialRadii(0.9);
+        const focusedItem = activeCategory.items.find(
+            (item) => item.id === focusedItemId && item.tools?.length,
+        );
+        const hasToolOrbits = activeCategory.items.some(
+            (item) => item.tools?.length,
+        );
+        const { radiusX, radiusY } = getRadialRadii(
+            focusedItem ? 1.15 : hasToolOrbits ? 1 : 0.9,
+        );
+        let itemNodes;
 
-        return [
-            {
-                ...person,
-                x: isPhoneViewport ? 10 : 15,
-                y: origin.y,
-                breadcrumb: true,
-                delay: 0,
-            },
-            {
-                ...activeCategory,
-                ...origin,
-                open: true,
-                delay: 0,
-            },
-            ...activeCategory.items.map((item, index) => ({
+        if (focusedItem) {
+            const siblings = activeCategory.items.filter(
+                (item) => item.id !== focusedItem.id,
+            );
+            const siblingNodes = siblings.map((item, index) => {
+                const angle =
+                    siblings.length === 1
+                        ? 0
+                        : -Math.PI / 4 +
+                          (index * Math.PI) / 2 / (siblings.length - 1);
+
+                return {
+                    ...item,
+                    parentId: activeCategory.id,
+                    ...constrainPosition(
+                        positionAtAngle(
+                            angle,
+                            radiusX,
+                            radiusY,
+                            origin,
+                        ),
+                        isPhoneViewport ? 29 : 38,
+                        12,
+                    ),
+                    contextItem: true,
+                    delay: 180 + index * 90,
+                };
+            });
+
+            itemNodes = [
+                {
+                    ...focusedItem,
+                    ...origin,
+                    parentId: activeCategory.id,
+                    focused: true,
+                    delay: 0,
+                },
+                ...siblingNodes,
+            ];
+        } else {
+            itemNodes = activeCategory.items.map((item, index) => ({
                 ...item,
                 parentId: activeCategory.id,
                 ...origin,
@@ -423,7 +584,66 @@
                     origin,
                 ),
                 delay: 120 + index * 75,
-            })),
+            }));
+        }
+
+        const toolNodes = itemNodes.flatMap((item, itemIndex) => {
+            const isFocusedBranch = item.id === focusedItem?.id;
+            const toolOrbitRadius = isFocusedBranch
+                ? isPhoneViewport
+                    ? 56
+                    : 72
+                : focusedItem
+                  ? isPhoneViewport
+                      ? 40
+                      : 48
+                  : isPhoneViewport
+                    ? viewportWidth <= 360
+                        ? 46
+                        : 48
+                    : 56;
+
+            return (item.tools ?? []).map((tool, toolIndex) => ({
+                ...tool,
+                parentId: item.id,
+                backgroundTool: Boolean(focusedItem && !isFocusedBranch),
+                ...constrainPosition(
+                    positionAroundNode(
+                        item,
+                        toolIndex,
+                        item.tools.length,
+                        toolOrbitRadius,
+                        -Math.PI / 2 + itemIndex * 0.28,
+                    ),
+                    isPhoneViewport ? 12 : 14,
+                    8,
+                ),
+                delay: 280 + itemIndex * 110 + toolIndex * 38,
+            }));
+        });
+
+        return [
+            {
+                ...person,
+                x: focusedItem ? (isPhoneViewport ? 9 : 12) : isPhoneViewport ? 10 : 15,
+                y: focusedItem ? origin.y - (isPhoneViewport ? 12 : 15) : origin.y,
+                breadcrumb: true,
+                delay: 0,
+            },
+            {
+                ...activeCategory,
+                ...(focusedItem
+                      ? {
+                          x: isPhoneViewport ? 12 : 13,
+                          y: origin.y + (isPhoneViewport ? 13 : 16),
+                      }
+                    : origin),
+                open: !focusedItem,
+                context: Boolean(focusedItem),
+                delay: 0,
+            },
+            ...itemNodes,
+            ...toolNodes,
         ];
     }
 
@@ -454,30 +674,78 @@
 
     function getNodeDiameter(node) {
         if (isPhoneViewport) {
+            if (node.overviewTool) {
+                return 14;
+            }
+
+            if (node.backgroundTool) {
+                return 20;
+            }
+
+            if (node.preview) {
+                return viewportWidth <= 360 ? 36 : 40;
+            }
+
+            if (node.focused) {
+                return 72;
+            }
+
+            if (node.context) {
+                return 52;
+            }
+
+            if (node.kind === "tool") {
+                return viewportWidth <= 360 ? 30 : 32;
+            }
+
             if (node.kind === "person") {
-                return node.breadcrumb ? 56 : 82;
+                return node.breadcrumb ? 52 : 78;
             }
 
             if (node.kind === "item") {
-                return viewportWidth <= 360 ? 54 : 58;
+                return viewportWidth <= 360 ? 50 : 54;
             }
 
-            return node.open ? 82 : 74;
+            return node.open ? 74 : 68;
+        }
+
+        if (node.overviewTool) {
+            return 18;
+        }
+
+        if (node.backgroundTool) {
+            return 24;
+        }
+
+        if (node.focused) {
+            return clamp(92, viewportWidth * 0.078, 100);
+        }
+
+        if (node.context) {
+            return clamp(64, viewportWidth * 0.056, 70);
+        }
+
+        if (node.preview) {
+            return clamp(44, viewportWidth * 0.038, 48);
+        }
+
+        if (node.kind === "tool") {
+            return clamp(34, viewportWidth * 0.034, 38);
         }
 
         if (node.kind === "person") {
             return node.breadcrumb
-                ? clamp(74, viewportWidth * 0.064, 86)
-                : clamp(108, viewportWidth * 0.093, 124);
+                ? clamp(68, viewportWidth * 0.058, 76)
+                : clamp(104, viewportWidth * 0.086, 114);
         }
 
         if (node.kind === "item") {
-            return clamp(68, viewportWidth * 0.062, 76);
+            return clamp(60, viewportWidth * 0.055, 66);
         }
 
         return node.open
-            ? clamp(102, viewportWidth * 0.087, 114)
-            : clamp(92, viewportWidth * 0.078, 104);
+            ? clamp(90, viewportWidth * 0.078, 98)
+            : clamp(84, viewportWidth * 0.072, 92);
     }
 
     function getEdgePoints(start, end) {
@@ -538,13 +806,17 @@
 
         nextNodes.forEach((node) => {
             const current = currentById.get(node.id);
+            const parent = node.parentId
+                ? nextNodes.find((candidate) => candidate.id === node.parentId)
+                : null;
             const origin =
                 current ??
+                (parent ??
                 (node.kind === "item" && nextCenter
                     ? nextCenter
                     : node.kind !== "person"
                       ? getGraphOrigin()
-                      : node);
+                      : node));
 
             starts.set(node.id, {
                 x: origin.x,
@@ -725,11 +997,19 @@
         }, 860);
     }
 
-    function enterCategory(categoryId) {
+    function enterCategory(categoryId, selectedNodeId = categoryId) {
+        const category = categories.find((item) => item.id === categoryId);
+        const selectedItem = category?.items.find(
+            (item) => item.id === selectedNodeId,
+        );
+
         startNavigation(() => {
-            returnFocusId = categoryId;
+            returnFocusId = selectedNodeId;
             activeCategoryId = categoryId;
-            selectedId = categoryId;
+            focusedItemId = selectedItem?.tools?.length
+                ? selectedItem.id
+                : null;
+            selectedId = selectedNodeId;
             view = "category";
         });
         focusElement("category-detail-title");
@@ -740,6 +1020,7 @@
         startNavigation(() => {
             view = "overview";
             activeCategoryId = null;
+            focusedItemId = null;
             selectedId = person.id;
             returnFocusId = null;
         });
@@ -751,6 +1032,32 @@
     function selectNode(node) {
         if (node.kind === "category" && view === "overview") {
             enterCategory(node.id);
+            return;
+        }
+
+        if (node.preview && view === "overview" && node.parentId) {
+            enterCategory(node.parentId, node.id);
+            return;
+        }
+
+        if (
+            view === "category" &&
+            node.kind === "category" &&
+            node.id === activeCategoryId &&
+            focusedItemId
+        ) {
+            startNavigation(() => {
+                focusedItemId = null;
+                selectedId = activeCategoryId;
+            });
+            return;
+        }
+
+        if (view === "category" && node.kind === "item" && node.tools?.length) {
+            startNavigation(() => {
+                focusedItemId = node.id;
+                selectedId = node.id;
+            });
             return;
         }
 
@@ -838,6 +1145,13 @@
     function handleKeydown(event) {
         if (event.key === "Escape" && view === "category") {
             event.preventDefault();
+            if (focusedItemId) {
+                startNavigation(() => {
+                    focusedItemId = null;
+                    selectedId = activeCategoryId;
+                });
+                return;
+            }
             returnToOverview();
         }
     }
@@ -893,16 +1207,17 @@
             view === "category" &&
             selectedId === activeCategoryId &&
             edge.source === activeCategoryId;
-        const emphasis =
+        const selectionEmphasis =
             selectedId !== person.id && !edgeIsActive(edge)
                 ? isOpenBranch
-                    ? 0.72
-                    : 0.12
+                    ? 0.86
+                    : 0.58
                 : 1;
+        const hierarchyEmphasis = edge.overviewTool ? 0.52 : 1;
 
         const edgeColor = "rgba(199, 99, 74, .42)";
 
-        return `--edge-color: ${edgeColor}; opacity: ${motionOpacity * emphasis};`;
+        return `--edge-color: ${edgeColor}; opacity: ${motionOpacity * selectionEmphasis * hierarchyEmphasis};`;
     }
 
     $: activeCategory = categories.find(
@@ -911,19 +1226,46 @@
     $: graphNodes =
         (viewportWidth,
         viewportHeight,
+        activeCategoryId,
+        focusedItemId,
         view === "overview" ? getOverviewNodes() : getCategoryNodes());
     $: graphEdges =
         view === "overview"
-            ? categories.map((category) => ({
-                  source: person.id,
-                  target: category.id,
-              }))
+            ? [
+                  ...categories.map((category) => ({
+                      source: person.id,
+                      target: category.id,
+                  })),
+                  ...categories.flatMap((category) =>
+                      category.items
+                          .filter((item) => item.showOnOverview)
+                          .map((item) => ({
+                              source: category.id,
+                              target: item.id,
+                          })),
+                  ),
+                  ...categories.flatMap((category) =>
+                      category.items.flatMap((item) =>
+                          (item.tools ?? []).map((tool) => ({
+                              source: item.id,
+                              target: tool.id,
+                              overviewTool: true,
+                          })),
+                      ),
+                  ),
+              ]
             : [
                   { source: person.id, target: activeCategoryId },
                   ...(activeCategory?.items ?? []).map((item) => ({
                       source: activeCategoryId,
                       target: item.id,
                   })),
+                  ...(activeCategory?.items ?? []).flatMap((item) =>
+                      (item.tools ?? []).map((tool) => ({
+                          source: item.id,
+                          target: tool.id,
+                      })),
+                  ),
               ];
     $: visibleEdges = renderedNodes.length
         ? renderedEdges.map((edge) => {
@@ -1019,7 +1361,7 @@
         <div
             class="graph-stage"
             class:view-category={view === "category"}
-            aria-label="Interactive map of ScopeTV1's skills, tools, projects, and working contexts"
+            aria-label="Interactive map of ScopeTV1's projects, background, and engineering practice"
         >
             <h2 class="sr-only" id="graph-title">Explore the connections</h2>
 
@@ -1048,21 +1390,29 @@
                 <div
                     class="graph-nodes"
                     aria-label={view === "overview"
-                        ? "Choose a category"
+                        ? "Choose a category or featured item"
                         : `Choose an item from ${activeCategory?.label}`}
                 >
                     {#each renderedNodes as node (node.id)}
                         <button
                             id={`node-${node.id}`}
-                            class="graph-node {node.kind} {node.id}"
+                            class="graph-node {node.kind} {node.id} {node.overviewTool
+                                ? 'overview-tool'
+                                : ''} {node.backgroundTool
+                                ? 'background-tool'
+                                : ''}"
                             class:logo-node={node.logos?.length}
                             class:logo-pair={node.logos?.length > 1}
+                            class:preview={node.preview}
+                            class:focused={node.focused}
+                            class:context={node.context}
                             class:active={selectedId === node.id}
                             class:connected={nodeIsConnected(node)}
                             class:open={node.open}
                             class:breadcrumb={node.breadcrumb}
                             class:exiting={node.exiting}
                             style={getNodeStyle(node)}
+                            title={node.kind === "tool" ? node.label : undefined}
                             aria-label={node.kind === "category"
                                 ? `Open ${node.label} category`
                                 : node.kind === "person"
@@ -1075,8 +1425,12 @@
                             aria-controls={node.kind === "category"
                                 ? "node-detail"
                                 : undefined}
-                            aria-hidden={node.exiting ? "true" : undefined}
-                            tabindex={node.exiting ? -1 : undefined}
+                            aria-hidden={node.exiting || node.overviewTool
+                                ? "true"
+                                : undefined}
+                            tabindex={node.exiting || node.overviewTool
+                                ? -1
+                                : undefined}
                             onpointerenter={() => (hoveredId = node.id)}
                             onpointerleave={() => (hoveredId = null)}
                             onfocus={() => (hoveredId = node.id)}
@@ -1096,6 +1450,27 @@
                                     {#each node.logos as logo}
                                         <img class="tool-logo" src={logo} alt="" />
                                     {/each}
+                                </span>
+                            {:else if node.icon}
+                                <span class="node-symbol" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        {#if node.icon === "university"}
+                                            <path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"></path>
+                                            <path d="M6.5 10.5v5c3.5 2.4 7.5 2.4 11 0v-5"></path>
+                                        {:else if node.icon === "company"}
+                                            <path d="M5 21V5h9v16M14 10h5v11M3 21h18"></path>
+                                            <path d="M8 8h3M8 12h3M8 16h3M16.5 13h.01M16.5 17h.01"></path>
+                                        {:else if node.icon === "cicd"}
+                                            <path d="M7 7h9l-2.5-2.5M17 17H8l2.5 2.5"></path>
+                                            <path d="M18.5 8.5A7 7 0 0 1 17 17M5.5 15.5A7 7 0 0 1 7 7"></path>
+                                        {:else if node.icon === "testing"}
+                                            <circle cx="12" cy="12" r="8"></circle>
+                                            <path d="m8.5 12 2.2 2.2 4.8-5"></path>
+                                        {:else if node.icon === "deployment"}
+                                            <path d="M12 16V4m0 0L8 8m4-4 4 4"></path>
+                                            <path d="M5 14v5h14v-5"></path>
+                                        {/if}
+                                    </svg>
                                 </span>
                             {:else}
                                 <span class="node-label">{node.label}</span>
@@ -1125,6 +1500,16 @@
                                 {selectedNode.label}
                             </h2>
                             <p>{selectedNode.description}</p>
+                            {#if selectedNode.tags?.length}
+                                <ul
+                                    class="detail-tags"
+                                    aria-label={`${selectedNode.label} tools and themes`}
+                                >
+                                    {#each selectedNode.tags as tag}
+                                        <li>{tag}</li>
+                                    {/each}
+                                </ul>
+                            {/if}
                         </div>
                     </aside>
                 {/if}
