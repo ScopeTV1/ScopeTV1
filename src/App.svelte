@@ -1069,17 +1069,5 @@
     <footer class="site-footer" id="site-footer">
         <span>© 2026 Luis Mauel</span>
         <span class="footer-note">Designed and built with intention.</span>
-        <div class="footer-links">
-            <a
-                href="https://be.linkedin.com/in/luismauel"
-                target="_blank"
-                rel="noreferrer">LinkedIn ↗</a
-            >
-            <a
-                href="https://github.com/ScopeTV1"
-                target="_blank"
-                rel="noreferrer">GitHub ↗</a
-            >
-        </div>
     </footer>
 </main>
