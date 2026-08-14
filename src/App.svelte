@@ -224,6 +224,7 @@
     let viewportHeight = 800;
     let hasCoarsePointer = false;
     let scrollProgress = 0;
+    let footerProgress = 0;
     let isNavigating = false;
     let hoveredId = null;
     let transitionTimer;
@@ -232,6 +233,8 @@
     let layoutSignature = "";
     let previousEdges = [];
     let animationFrame = 0;
+    let scrollAnimationFrame = 0;
+    let cancelActiveScroll = null;
 
     onMount(() => {
         const updateViewport = () => {
@@ -242,6 +245,7 @@
 
         const updateScrollProgress = () => {
             const graphSection = document.getElementById("graph");
+            const footer = document.getElementById("site-footer");
             if (!graphSection) {
                 return;
             }
@@ -251,6 +255,14 @@
                 (entryDistance - graphSection.getBoundingClientRect().top) /
                 entryDistance;
             scrollProgress = Math.min(1, Math.max(0, progress));
+
+            if (footer) {
+                const footerRect = footer.getBoundingClientRect();
+                const revealDistance = Math.max(footerRect.height, 1);
+                const revealProgress =
+                    (window.innerHeight - footerRect.top) / revealDistance;
+                footerProgress = Math.min(1, Math.max(0, revealProgress));
+            }
         };
 
         let scrollFrame = 0;
@@ -276,6 +288,7 @@
             cancelAnimationFrame(scrollFrame);
             window.clearTimeout(transitionTimer);
             window.cancelAnimationFrame(animationFrame);
+            cancelActiveScroll?.();
         };
     });
 
@@ -453,17 +466,17 @@
 
         if (node.kind === "person") {
             return node.breadcrumb
-                ? clamp(68, viewportWidth * 0.06, 78)
-                : clamp(96, viewportWidth * 0.085, 110);
+                ? clamp(74, viewportWidth * 0.064, 86)
+                : clamp(108, viewportWidth * 0.093, 124);
         }
 
         if (node.kind === "item") {
-            return clamp(64, viewportWidth * 0.058, 70);
+            return clamp(68, viewportWidth * 0.062, 76);
         }
 
         return node.open
-            ? clamp(94, viewportWidth * 0.08, 104)
-            : clamp(84, viewportWidth * 0.072, 94);
+            ? clamp(102, viewportWidth * 0.087, 114)
+            : clamp(92, viewportWidth * 0.078, 104);
     }
 
     function getEdgePoints(start, end) {
@@ -757,6 +770,70 @@
         });
     }
 
+    function scrollToFooter(event) {
+        event.preventDefault();
+        const footer = document.getElementById("site-footer");
+        if (!footer) {
+            return;
+        }
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            footer.scrollIntoView({ block: "end" });
+            return;
+        }
+
+        cancelActiveScroll?.();
+
+        const start = window.scrollY;
+        const maximum =
+            document.documentElement.scrollHeight - window.innerHeight;
+        const target = Math.min(
+            maximum,
+            Math.max(
+                0,
+                start + footer.getBoundingClientRect().bottom - window.innerHeight,
+            ),
+        );
+        const distance = target - start;
+        const duration = Math.min(
+            3000,
+            Math.max(2200, Math.abs(distance) * 1.5),
+        );
+        const startedAt = performance.now();
+
+        const stop = () => {
+            window.cancelAnimationFrame(scrollAnimationFrame);
+            scrollAnimationFrame = 0;
+            document.documentElement.classList.remove("is-slow-scrolling");
+            window.removeEventListener("wheel", stop);
+            window.removeEventListener("touchstart", stop);
+            window.removeEventListener("keydown", stop);
+            window.removeEventListener("resize", stop);
+            if (cancelActiveScroll === stop) {
+                cancelActiveScroll = null;
+            }
+        };
+
+        const animate = (now) => {
+            const progress = Math.min(1, (now - startedAt) / duration);
+            window.scrollTo(0, start + distance * easeInOut(progress));
+
+            if (progress < 1) {
+                scrollAnimationFrame = window.requestAnimationFrame(animate);
+            } else {
+                stop();
+            }
+        };
+
+        cancelActiveScroll = stop;
+        document.documentElement.classList.add("is-slow-scrolling");
+        window.addEventListener("wheel", stop, { passive: true });
+        window.addEventListener("touchstart", stop, { passive: true });
+        window.addEventListener("keydown", stop);
+        window.addEventListener("resize", stop);
+        scrollAnimationFrame = window.requestAnimationFrame(animate);
+    }
+
     function handleKeydown(event) {
         if (event.key === "Escape" && view === "category") {
             event.preventDefault();
@@ -869,6 +946,8 @@
         previousEdges = graphEdges;
     }
     $: selectedNode = getNode(selectedId);
+    $: sceneProgress = easeInOut(scrollProgress);
+    $: easedFooterProgress = easeInOut(footerProgress);
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
@@ -883,7 +962,7 @@
 <main
     id="top"
     class:view-category={view === "category"}
-    style={`--scene-opacity: ${0.14 + scrollProgress * 0.86}; --scene-scale: ${0.86 + scrollProgress * 0.14}; --scene-y: ${(1 - scrollProgress) * 34}px;`}
+    style={`--scene-opacity: ${0.05 + sceneProgress * 0.95}; --scene-scale: ${0.95 + sceneProgress * 0.05}; --scene-y: ${(1 - sceneProgress) * 26}px; --scene-veil-opacity: ${(1 - sceneProgress) * 0.92}; --footer-opacity: ${0.2 + easedFooterProgress * 0.8}; --footer-y: ${(1 - easedFooterProgress) * 12}px;`}
 >
     <nav class="topbar" aria-label="Main navigation">
         <div class="brand-lockup">
@@ -927,6 +1006,7 @@
         <a
             class="scroll-cue"
             href="#site-footer"
+            onclick={scrollToFooter}
             aria-label="Scroll to explore the graph"
         >
             <span>Scroll to explore</span>
@@ -1028,17 +1108,6 @@
                 </div>
 
                 {#if view === "category"}
-                    <button
-                        class="back-control"
-                        type="button"
-                        onclick={returnToOverview}
-                        aria-controls="graph"
-                    >
-                        <span aria-hidden="true">←</span> Overview
-                    </button>
-                {/if}
-
-                {#if view === "category"}
                     <aside
                         class="graph-detail"
                         id="node-detail"
@@ -1068,6 +1137,15 @@
 
     <footer class="site-footer" id="site-footer">
         <span>© 2026 Luis Mauel</span>
-        <span class="footer-note">Designed and built with intention.</span>
+        <span class="footer-note">Designed with intention.</span>
+        <span class="footer-tech" aria-label="Built with Svelte">
+            <span>Built with</span>
+            <span class="footer-tech-tools" aria-hidden="true">
+                <img
+                    src="https://cdn.simpleicons.org/svelte/FF3E00"
+                    alt=""
+                />
+            </span>
+        </span>
     </footer>
 </main>

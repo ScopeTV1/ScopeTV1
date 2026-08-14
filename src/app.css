@@ -24,6 +24,10 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+html.is-slow-scrolling {
+    scroll-behavior: auto;
+}
+
 body {
     margin: 0;
     min-width: 320px;
@@ -202,7 +206,6 @@ h1 em {
 }
 
 .scroll-cue:focus-visible,
-.back-control:focus-visible,
 .graph-node:focus-visible {
     outline: 2px solid var(--coral);
     outline-offset: 5px;
@@ -221,6 +224,16 @@ h1 em {
     overflow: hidden;
     position: sticky;
     top: 0;
+}
+
+.graph-stage::after {
+    background: var(--canvas);
+    content: '';
+    inset: 0;
+    opacity: var(--scene-veil-opacity, 0);
+    pointer-events: none;
+    position: absolute;
+    z-index: 10;
 }
 
 .graph-canvas {
@@ -252,14 +265,14 @@ h1 em {
 .graph-lines line {
     stroke: var(--edge-color, rgba(62, 65, 64, .28));
     stroke-linecap: round;
-    stroke-width: .9px;
+    stroke-width: 1.1px;
     transition: stroke .35s ease, stroke-width .35s ease;
     vector-effect: non-scaling-stroke;
 }
 
 .graph-lines line.active {
     stroke: rgba(199, 99, 74, .88);
-    stroke-width: 1.4px;
+    stroke-width: 1.6px;
 }
 
 .graph-lines line.dimmed {
@@ -288,7 +301,7 @@ h1 em {
     transform: translate(-50%, -50%);
     box-shadow: none;
     transition: background .25s ease, border-color .25s ease, box-shadow .42s ease, color .25s ease, filter .35s ease, transform .42s cubic-bezier(.22, 1, .36, 1);
-    width: var(--node-size, clamp(84px, 7.2vw, 94px));
+    width: var(--node-size, clamp(92px, 7.8vw, 104px));
     will-change: left, top, opacity;
 }
 
@@ -322,8 +335,7 @@ h1 em {
 }
 
 .graph-node.exiting,
-.graph-canvas.is-navigating .graph-node,
-.graph-canvas.is-navigating .back-control {
+.graph-canvas.is-navigating .graph-node {
     pointer-events: none;
 }
 
@@ -335,7 +347,7 @@ h1 em {
     filter: none;
     opacity: var(--icon-opacity, 1);
     padding: 0;
-    width: var(--node-size, clamp(96px, 8.5vw, 110px));
+    width: var(--node-size, clamp(108px, 9.3vw, 124px));
     z-index: 6;
 }
 
@@ -350,7 +362,7 @@ h1 em {
     color: var(--coral);
     filter: none;
     opacity: var(--icon-opacity, 1);
-    width: var(--node-size, clamp(68px, 6vw, 78px));
+    width: var(--node-size, clamp(74px, 6.4vw, 86px));
 }
 
 .person-icon {
@@ -380,12 +392,12 @@ h1 em {
 .graph-node.category.open {
     background: rgba(241, 238, 232, .88);
     box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 10%, transparent);
-    width: var(--node-size, clamp(94px, 8vw, 104px));
+    width: var(--node-size, clamp(102px, 8.7vw, 114px));
 }
 
 .graph-node.item {
     background: rgba(241, 238, 232, .88);
-    width: var(--node-size, clamp(64px, 5.8vw, 70px));
+    width: var(--node-size, clamp(68px, 6.2vw, 76px));
 }
 
 .graph-node.item.logo-node {
@@ -438,37 +450,6 @@ h1 em {
     line-height: 1.15;
     max-width: 88px;
     text-wrap: balance;
-}
-
-.back-control {
-    align-items: center;
-    background: transparent;
-    border: 0;
-    color: var(--muted);
-    cursor: pointer;
-    display: flex;
-    font-family: 'DM Mono', monospace;
-    font-size: .58rem;
-    gap: 8px;
-    letter-spacing: .05em;
-    padding: 9px 0;
-    position: absolute;
-    right: clamp(22px, 5vw, 72px);
-    text-transform: uppercase;
-    top: 13%;
-    transition: color .2s ease, transform .2s ease;
-    z-index: 8;
-}
-
-.back-control span {
-    color: var(--coral);
-    font-size: .95rem;
-}
-
-.back-control:hover,
-.back-control:focus-visible {
-    color: var(--ink);
-    transform: translateX(-3px);
 }
 
 .graph-detail {
@@ -525,19 +506,43 @@ h1 em {
     display: grid;
     font-family: 'DM Mono', monospace;
     font-size: .58rem;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
     letter-spacing: .04em;
     margin: 0 clamp(22px, 5vw, 72px);
+    opacity: var(--footer-opacity, 1);
     padding: 22px 0 24px;
     position: relative;
     text-transform: uppercase;
+    transform: translateY(var(--footer-y, 0));
+    will-change: opacity, transform;
     z-index: 3;
 }
 
 .footer-note {
+    justify-self: center;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.footer-tech {
+    align-items: center;
+    display: inline-flex;
+    gap: 7px;
     justify-self: end;
     text-align: right;
     white-space: nowrap;
+}
+
+.footer-tech-tools {
+    align-items: center;
+    display: inline-flex;
+    gap: 5px;
+}
+
+.footer-tech-tools img {
+    display: block;
+    height: 13px;
+    width: 13px;
 }
 
 .sr-only {
@@ -628,7 +633,15 @@ h1 em {
     }
 
     .graph-stage {
-        height: calc(100dvh - 50px - env(safe-area-inset-bottom));
+        height: calc(100dvh - 70px - env(safe-area-inset-bottom));
+    }
+
+    .graph-lines line {
+        stroke-width: .9px;
+    }
+
+    .graph-lines line.active {
+        stroke-width: 1.4px;
     }
 
     .graph-node {
@@ -655,12 +668,6 @@ h1 em {
     .node-label {
         font-size: .61rem;
         max-width: 66px;
-    }
-
-    .back-control {
-        min-height: 44px;
-        right: max(14px, env(safe-area-inset-right));
-        top: calc(58px + env(safe-area-inset-top));
     }
 
     .graph-detail {
@@ -701,6 +708,17 @@ h1 em {
             0
             max(14px, env(safe-area-inset-left));
         padding: 18px 0 calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .footer-note {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+    }
+
+    .footer-tech {
+        grid-column: 2;
+        grid-row: 1;
     }
 
 }
@@ -749,13 +767,7 @@ h1 em {
     }
 
     .graph-stage {
-        height: calc(100dvh - 32px - env(safe-area-inset-bottom));
-    }
-
-    .back-control {
-        font-size: .54rem;
-        right: max(12px, env(safe-area-inset-right));
-        top: calc(50px + env(safe-area-inset-top));
+        height: calc(100dvh - 47px - env(safe-area-inset-bottom));
     }
 
     .graph-detail {
@@ -841,10 +853,6 @@ h1 em {
         gap: 8px;
     }
 
-    .back-control {
-        top: calc(48px + env(safe-area-inset-top));
-    }
-
     .graph-detail {
         bottom: max(6px, env(safe-area-inset-bottom));
         display: grid;
@@ -873,6 +881,15 @@ h1 em {
         scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         transition-duration: .01ms !important;
+    }
+
+    .site-footer {
+        opacity: 1;
+        transform: none;
+    }
+
+    .graph-stage::after {
+        opacity: 0;
     }
 }
 
