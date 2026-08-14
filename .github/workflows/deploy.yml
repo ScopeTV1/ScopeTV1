@@ -32,10 +32,32 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Verify production artifact
+        shell: bash
+        run: |
+          test -f dist/index.html
+          grep -q './assets/' dist/index.html
+          ! grep -q '/src/main.js' dist/index.html
+          test -n "$(find dist/assets -maxdepth 1 -type f | head -n 1)"
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Verify Pages uses the workflow source
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pages_config=$(curl --fail --silent --show-error \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages")
+          pages_build_type=$(printf '%s' "${pages_config}" | jq -r '.build_type // empty')
+          if [ "${pages_build_type}" != "workflow" ]; then
+            echo "GitHub Pages is configured as '${pages_build_type:-unknown}', not 'workflow'."
+            echo "Set Settings > Pages > Build and deployment > Source to GitHub Actions, then rerun this workflow."
+            exit 1
+          fi
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: dist
       - name: Deploy to GitHub Pages
