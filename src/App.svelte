@@ -297,9 +297,17 @@
     }
 
     function getGraphDimensions() {
+        const graphStage =
+            typeof document === "undefined"
+                ? null
+                : document.querySelector(".graph-stage");
+
         return {
-            width: Math.max(Math.min(viewportWidth, 1280), 320),
-            height: Math.max(viewportHeight, 480),
+            width: Math.max(
+                Math.min(graphStage?.clientWidth ?? viewportWidth, 1280),
+                320,
+            ),
+            height: Math.max(graphStage?.clientHeight ?? viewportHeight, 480),
         };
     }
 
@@ -918,7 +926,7 @@
         </h1>
         <a
             class="scroll-cue"
-            href="#graph"
+            href="#site-footer"
             aria-label="Scroll to explore the graph"
         >
             <span>Scroll to explore</span>
@@ -1058,7 +1066,7 @@
         </div>
     </section>
 
-    <footer class="site-footer">
+    <footer class="site-footer" id="site-footer">
         <span>© 2026 Luis Mauel</span>
         <span class="footer-note">Designed and built with intention.</span>
         <div class="footer-links">

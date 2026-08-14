@@ -545,7 +545,11 @@ h1 em {
 }
 
 .footer-links a {
+    align-items: center;
+    display: inline-flex;
+    line-height: 1;
     transition: color .2s ease;
+    white-space: nowrap;
 }
 
 .footer-links a:hover,
@@ -641,7 +645,7 @@ h1 em {
     }
 
     .graph-stage {
-        height: 100dvh;
+        height: calc(100dvh - 50px - env(safe-area-inset-bottom));
     }
 
     .graph-node {
@@ -746,7 +750,7 @@ h1 em {
     }
 
     .intro-section {
-        min-height: 94dvh;
+        min-height: 100dvh;
         padding-bottom: calc(60px + env(safe-area-inset-bottom));
         padding-top: calc(72px + env(safe-area-inset-top));
     }
@@ -756,15 +760,20 @@ h1 em {
     }
 
     .scroll-cue {
+        bottom: env(safe-area-inset-bottom);
         font-size: .54rem;
         gap: 6px;
-        padding-bottom: 4px;
+        padding-bottom: 0;
         padding-top: 6px;
     }
 
     .graph-section {
         margin-top: -6svh;
         min-height: 114svh;
+    }
+
+    .graph-stage {
+        height: calc(100dvh - 53px - env(safe-area-inset-bottom));
     }
 
     .back-control {
@@ -815,7 +824,14 @@ h1 em {
     }
 
     .footer-links {
-        gap: 8px;
+        align-items: center;
+        gap: 4px;
+        justify-self: end;
+    }
+
+    .footer-links a {
+        min-height: 32px;
+        padding: 0 4px;
     }
 }
 
