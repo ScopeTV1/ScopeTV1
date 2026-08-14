@@ -53,8 +53,8 @@ button {
 main {
     background-color: var(--canvas);
     background-image:
-        linear-gradient(rgba(40, 48, 51, .032) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(40, 48, 51, .032) 1px, transparent 1px),
+        linear-gradient(rgba(40, 48, 51, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(40, 48, 51, .05) 1px, transparent 1px),
         radial-gradient(rgba(40, 48, 51, .08) .7px, transparent .7px);
     background-size: 112px 112px, 112px 112px, 28px 28px;
     overflow: visible;
@@ -212,8 +212,8 @@ h1 em {
 }
 
 .graph-section {
-    margin-top: -16svh;
-    min-height: 130svh;
+    margin-top: -24svh;
+    min-height: 138svh;
     position: relative;
     z-index: 2;
 }
@@ -501,7 +501,6 @@ h1 em {
 
 .site-footer {
     align-items: center;
-    border-top: 1px solid var(--line);
     color: var(--muted);
     display: grid;
     font-family: 'DM Mono', monospace;
@@ -628,8 +627,8 @@ h1 em {
     }
 
     .graph-section {
-        margin-top: -10svh;
-        min-height: 124svh;
+        margin-top: -16svh;
+        min-height: 130svh;
     }
 
     .graph-stage {
@@ -762,8 +761,8 @@ h1 em {
     }
 
     .graph-section {
-        margin-top: -6svh;
-        min-height: 114svh;
+        margin-top: -12svh;
+        min-height: 133svh;
     }
 
     .graph-stage {

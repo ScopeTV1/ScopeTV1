@@ -250,10 +250,11 @@
                 return;
             }
 
-            const entryDistance = Math.max(window.innerHeight * 0.72, 1);
+            const revealStart = window.innerHeight * 0.27;
+            const revealDistance = Math.max(window.innerHeight * 0.65, 1);
             const progress =
-                (entryDistance - graphSection.getBoundingClientRect().top) /
-                entryDistance;
+                (revealStart - graphSection.getBoundingClientRect().top) /
+                revealDistance;
             scrollProgress = Math.min(1, Math.max(0, progress));
 
             if (footer) {
@@ -946,7 +947,7 @@
         previousEdges = graphEdges;
     }
     $: selectedNode = getNode(selectedId);
-    $: sceneProgress = easeInOut(scrollProgress);
+    $: sceneProgress = scrollProgress;
     $: easedFooterProgress = easeInOut(footerProgress);
 </script>
 
@@ -962,7 +963,7 @@
 <main
     id="top"
     class:view-category={view === "category"}
-    style={`--scene-opacity: ${0.05 + sceneProgress * 0.95}; --scene-scale: ${0.95 + sceneProgress * 0.05}; --scene-y: ${(1 - sceneProgress) * 26}px; --scene-veil-opacity: ${(1 - sceneProgress) * 0.92}; --footer-opacity: ${0.2 + easedFooterProgress * 0.8}; --footer-y: ${(1 - easedFooterProgress) * 12}px;`}
+    style={`--scene-opacity: ${sceneProgress}; --scene-scale: 1; --scene-y: 0; --scene-veil-opacity: 0; --footer-opacity: ${0.2 + easedFooterProgress * 0.8}; --footer-y: ${(1 - easedFooterProgress) * 12}px;`}
 >
     <nav class="topbar" aria-label="Main navigation">
         <div class="brand-lockup">
