@@ -340,21 +340,22 @@ h1 em {
 }
 
 .graph-node.person {
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
+    background: var(--paper);
+    border-color: rgba(40, 48, 51, .22);
+    box-shadow: 0 0 0 5px rgba(232, 228, 220, .8);
     color: var(--coral);
     filter: none;
     opacity: var(--icon-opacity, 1);
-    padding: 0;
+    padding: 4px;
     width: var(--node-size, clamp(108px, 9.3vw, 124px));
     z-index: 6;
 }
 
 .graph-node.person:hover,
 .graph-node.person:focus-visible {
-    background: transparent;
-    box-shadow: none;
+    background: var(--paper);
+    border-color: var(--coral);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--coral) 14%, transparent);
     filter: none;
 }
 
@@ -367,26 +368,26 @@ h1 em {
 
 .person-icon {
     align-items: center;
+    border-radius: 50%;
     display: flex;
     height: 100%;
     justify-content: center;
+    overflow: hidden;
+    transform: scale(var(--icon-scale, 1));
+    transform-origin: center;
     width: 100%;
 }
 
-.person-icon svg {
-    fill: none;
-    height: 68%;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-width: 2.2;
-    transform: scale(var(--icon-scale, 1));
-    transform-origin: center;
-    width: 68%;
+.person-avatar {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
 }
 
-.graph-node.person.breadcrumb .person-icon svg {
-    height: 68%;
-    width: 68%;
+.graph-node.person.breadcrumb .person-icon {
+    box-shadow: inset 0 0 0 1px rgba(40, 48, 51, .1);
 }
 
 .graph-node.category.open {

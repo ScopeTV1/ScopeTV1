@@ -1085,15 +1085,11 @@
                         >
                             {#if node.kind === "person"}
                                 <span class="person-icon" aria-hidden="true">
-                                    <svg
-                                        viewBox="0 0 48 48"
-                                        role="presentation"
-                                    >
-                                        <circle cx="24" cy="15" r="7"></circle>
-                                        <path
-                                            d="M11 39c1.7-8.2 6.1-12.3 13-12.3S35.3 30.8 37 39"
-                                        ></path>
-                                    </svg>
+                                    <img
+                                        class="person-avatar"
+                                        src="/images/luis-mountain-avatar.png"
+                                        alt=""
+                                    />
                                 </span>
                             {:else if node.logos?.length}
                                 <span class="tool-logo-lockup" aria-hidden="true">
